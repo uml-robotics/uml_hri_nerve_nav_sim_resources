@@ -1,0 +1,75 @@
+<launch>
+  <!-- This launch file includes the setup_test launch file and sets the parameters needed to launch
+  the nerve2_full_regular world. -->
+
+  <!-- Enable gazebo gui or not -->
+  <arg name="gui" default="true" />
+
+  <!-- Type of robot being spawned in -->
+  <arg name="robot" default="pioneer" />
+
+  <!-- Define the spawn location for the robot in Gazebo-->
+  <arg name="spawn_x" default="0"/>
+  <arg name="spawn_y" default="8.0"/>
+  <arg name="spawn_z" default="0"/>
+  <arg name="spawn_yaw" default="0"/>
+
+  <!-- Define map settings, values are set in the level launch files-->
+  <arg name="world_path" value="nerve2/nerve2_full_regular.world"/>
+
+  <!-- Determine whether an obstacle robot should be spawned in -->
+  <arg name="obstacle_bot" default="false" />
+
+  <!-- Define the spawn location for the obstacle bot -->
+  <arg name="spawn_obstacle_bot_x" default="1"/>
+  <arg name="spawn_obstacle_bot_y" default="0"/>
+  <arg name="spawn_obstacle_bot_z" default="0"/>
+  <arg name="spawn_obstacle_bot_yaw" default="0"/>
+
+  <!-- Determine whether a dynamic obstacle should be spawned in -->
+  <arg name="dynamic_obstacle" default="false" />
+
+  <!-- Define the two spawn locations for the dymanic obstacle to teleport in between if wanted -->
+  <arg name="obstacle_1_x" default="4.5"/>
+  <arg name="obstacle_1_y" default="8"/>
+  <arg name="obstacle_1_z" default="0"/>
+  <arg name="obstacle_1_theta" default="0"/>
+  <arg name="obstacle_2_x" default="4.5"/>
+  <arg name="obstacle_2_y" default="12"/>
+  <arg name="obstacle_2_z" default="0"/>
+  <arg name="obstacle_2_theta" default="0"/>
+
+  <!-- Name of dynamic obstacle that will be spawned in if needed -->
+  <arg name="obstacle_name" default="caution_100cm_block" />
+
+  <!-- Flip obstacle spawner -->
+  <arg name="flip_obstacle" default="true" />
+
+  <!-- Set up the simulation -->
+  <include file="$(find uml_hri_nerve_nav_sim_resources)/launch/setup_simulation.launch">
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="robot" value="$(arg robot)" />
+    <arg name="spawn_x" value="$(arg spawn_x)" />
+    <arg name="spawn_y" value="$(arg spawn_y)" />
+    <arg name="spawn_z" value="$(arg spawn_z)" />
+    <arg name="spawn_yaw" value="$(arg spawn_yaw)" />
+    <arg name="world_path" value="$(arg world_path)" />
+    <arg name="obstacle_bot" value="$(arg obstacle_bot)" />
+    <arg name="spawn_obstacle_bot_x" value="$(arg spawn_obstacle_bot_x)" />
+    <arg name="spawn_obstacle_bot_y" value="$(arg spawn_obstacle_bot_y)" />
+    <arg name="spawn_obstacle_bot_z" value="$(arg spawn_obstacle_bot_z)" />
+    <arg name="spawn_obstacle_bot_yaw" value="$(arg spawn_obstacle_bot_yaw)" />
+    <arg name="dynamic_obstacle" value="$(arg dynamic_obstacle)" />
+    <arg name="obstacle_name" value="$(arg obstacle_name)" />
+    <arg name="flip_obstacle" value="$(arg flip_obstacle)" />
+    <arg name="obstacle_1_x" value="$(arg obstacle_1_x)"/>
+    <arg name="obstacle_1_y" value="$(arg obstacle_1_y)"/>
+    <arg name="obstacle_1_z" value="$(arg obstacle_1_z)"/>
+    <arg name="obstacle_1_theta" value="$(arg obstacle_1_theta)"/>
+    <arg name="obstacle_2_x" value="$(arg obstacle_2_x)"/>
+    <arg name="obstacle_2_y" value="$(arg obstacle_2_y)"/>
+    <arg name="obstacle_2_z" value="$(arg obstacle_2_z)"/>
+    <arg name="obstacle_2_theta" value="$(arg obstacle_2_theta)"/>
+  </include>
+
+</launch>

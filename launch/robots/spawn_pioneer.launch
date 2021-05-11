@@ -1,0 +1,46 @@
+<!-- Assumes Gazebo is already running -->
+<launch>
+  <!-- This launch file includes all the nodes needed to setup a simulated pioneer -->
+
+  <!-- Settings (Robot position args are overidden by spawn_world.launch)-->
+  <arg name="x" default="0.0" />
+  <arg name="y" default="0.0" />
+  <arg name="z" default="0.0" />
+  <arg name="yaw" default="0.0" /> <!-- Rotation in radians. -->
+
+  <!-- model_name determines the topics to be published, and serves as a unique identifier for Gazebo -->
+  <arg name="model_type" value="pioneer" />
+  <!-- The location of the mesh files for our robot -->
+  <arg name="model_dir" value="$(find uml_hri_nerve_nav_sim_resources)/resources/models/pioneer/meshes" />
+  <!-- The location of the top-level xacro file that defines the robot  -->
+  <arg name="model_file" value="$(find uml_hri_nerve_nav_sim_resources)/resources/models/pioneer/defs/pioneer.xacro" />
+
+  <!-- Load robot_description parameter from top-level pioneer3dx.xacro file -->
+  <!-- Also send the model_dir and model_type as arguments to help us generate the model -->
+  <param name="$(arg model_type)/robot_description" command="$(find xacro)/xacro --inorder $(arg model_file) model_dir:=$(arg model_dir) model_name:=$(arg model_type)" />
+
+  <!-- publish TFs for static/fixed links (based on the robot_description parameter) -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="state_publisher" output="screen">
+    <param name="publish_frequency" type="double" value="30.0"/>
+    <remap from="robot_description" to="$(arg model_type)/robot_description"/>
+  </node>
+
+  <!-- Without the joint_state_publisher, non-fixed joints that are not published by a plugin
+       (i.e. - the swivel_link joint) will not have it's transform published.
+       joint_state_publisher also uses the robot_description parameter. -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_publisher" output="screen">
+    <remap from="robot_description" to="$(arg model_type)/robot_description"/>
+  </node>
+
+  <!-- Spawn robot into Gazebo -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="
+    -urdf
+    -model $(arg model_type)
+    -param $(arg model_type)/robot_description
+    -x $(arg x)
+    -y $(arg y)
+    -z $(arg z)
+    -Y $(arg yaw)">
+  </node>
+
+</launch>

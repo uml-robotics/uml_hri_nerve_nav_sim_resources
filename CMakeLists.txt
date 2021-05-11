@@ -2,15 +2,22 @@ cmake_minimum_required(VERSION 3.0.2)
 project(uml_hri_nerve_nav_sim_resources)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  gazebo_ros
   roscpp
-  rospy
   std_msgs
+  std_srvs
+  geometry_msgs
+  tf2
+  message_generation
+  move_base_msgs
+  actionlib
+  gazebo_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -105,7 +112,15 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES uml_hri_nerve_nav_sim_resources
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+   CATKIN_DEPENDS
+   gazebo_ros 
+   roscpp 
+   std_msgs 
+   std_srvs 
+   geometry_msgs 
+   message_runtime 
+   actionlib 
+   gazebo_msgs
 #  DEPENDS system_lib
 )
 
@@ -134,6 +149,9 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/uml_hri_nerve_nav_sim_resources_node.cpp)
+add_executable(spawn_publisher src/spawn_pub.cpp)
+add_executable(reset_robot src/reset_robot.cpp)
+add_executable(dynamic_obstacles src/dynamic_obstacle_spawner.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -144,11 +162,23 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(spawn_publisher ${spawn_publisher_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(reset_robot ${reset_robot_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(dynamic_obstacles ${dynamic_obstacles_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+target_link_libraries(spawn_publisher
+${catkin_LIBRARIES}
+)
+target_link_libraries(reset_robot
+${catkin_LIBRARIES}
+)
+target_link_libraries(dynamic_obstacles
+${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##

@@ -1,0 +1,92 @@
+<launch>
+  <!-- This launch file is responsible for launching all of the necessesary nodes and launch files needed to setup a test. -->
+
+  <!-- Enable gazebo gui or not -->
+  <arg name="gui" default="true" />
+
+  <!-- Type of robot being spawned in -->
+  <arg name="robot" default="pioneer" />
+
+  <!-- Define the spawn location for the robot in Gazebo-->
+  <arg name="spawn_x" default="0"/>
+  <arg name="spawn_y" default="0"/>
+  <arg name="spawn_z" default="0"/>
+  <arg name="spawn_yaw" default="0"/>
+
+  <!-- Define map settings, values are set in the level launch files-->
+  <arg name="world_path" />
+
+  <!-- Determine whether an obstacle robot should be spawned in -->
+  <arg name="obstacle_bot" default="false" />
+
+  <!-- Define the spawn location for the obstacle bot -->
+  <arg name="spawn_obstacle_bot_x" default="1"/>
+  <arg name="spawn_obstacle_bot_y" default="0"/>
+  <arg name="spawn_obstacle_bot_z" default="0"/>
+  <arg name="spawn_obstacle_bot_yaw" default="0"/>
+
+  <!-- Determine whether a dynamic obstacle should be spawned in -->
+  <arg name="dynamic_obstacle" default="false" />
+
+  <!-- Define the two spawn locations for the dymanic obstacle to teleport in between if wanted -->
+  <arg name="obstacle_1_x" default="0"/>
+  <arg name="obstacle_1_y" default="0"/>
+  <arg name="obstacle_1_z" default="0"/>
+  <arg name="obstacle_1_theta" default="0"/>
+  <arg name="obstacle_2_x" default="0"/>
+  <arg name="obstacle_2_y" default="0"/>
+  <arg name="obstacle_2_z" default="0"/>
+  <arg name="obstacle_2_theta" default="0"/>
+
+  <!-- Name of dynamic obstacle that will be spawned in if needed -->
+  <arg name="obstacle_name" default="caution_100cm_block" />
+
+  <!-- Flip obstacle spawner -->
+  <arg name="flip_obstacle" default="true" />
+
+  <!-- Publish robot spawn if robot resetting is needed -->
+  <node name="spawn_publisher" pkg="uml_hri_nerve_nav_sim_resources" type="spawn_publisher" output="screen" >
+    <param name="x_position" value="$(arg spawn_x)" />
+    <param name="y_position" value="$(arg spawn_y)" />
+    <param name="z_rotation" value="$(arg spawn_yaw)" />
+  </node>
+
+  <!-- Include spawn_world.launch and set it's arguments if simulation is needed-->
+  <include file="$(find uml_hri_nerve_nav_sim_resources)/launch/spawn_world.launch">
+    <!-- World file -->
+    <arg name="world_path" value="$(arg world_path)" />
+    <arg name="gui" value="$(arg gui)" />
+  </include>
+
+  <!-- Setup robot -->
+  <include file="$(find uml_hri_nerve_nav_sim_resources)/launch/robots/spawn_$(arg robot).launch">
+    <arg name="x" value="$(arg spawn_x)" />
+    <arg name="y" value="$(arg spawn_y)" />
+    <arg name="z" value="$(arg spawn_z)" />
+    <arg name="yaw" value="$(arg spawn_yaw)" />
+  </include>
+
+  <!-- Setup obstacle bot if wanted -->
+  <include file="$(find uml_hri_nerve_nav_sim_resources)/launch/spawn_obstacle_bot.launch" if="$(arg obstacle_bot)">
+    <arg name="robot" value="obstacle_bot" />
+    <arg name="x" value="$(arg spawn_obstacle_bot_x)" />
+    <arg name="y" value="$(arg spawn_obstacle_bot_y)" />
+    <arg name="z" value="$(arg spawn_obstacle_bot_z)" />
+    <arg name="yaw" value="$(arg spawn_obstacle_bot_yaw)" />
+  </include>
+
+  <!-- Setup dynamic obstacle spawner if wanted -->
+  <node name="dynamic_obstacle_manager" pkg="uml_hri_nerve_nav_sim_resources" type="dynamic_obstacles" if="$(arg dynamic_obstacle)">
+    <param name="model_description" textfile="$(find uml_hri_nerve_nav_sim_resources)/resources/models/obstacles/$(arg obstacle_name)/model.sdf"/>
+    <param name="invert_spawn_positions" value="$(arg flip_obstacle)" />
+    <param name="x_pos_1" value="$(arg obstacle_1_x)" />
+    <param name="y_pos_1" value="$(arg obstacle_1_y)" />
+    <param name="z_pos_1" value="$(arg obstacle_1_z)" />
+    <param name="theta_1" value="$(arg obstacle_1_theta)" />
+    <param name="x_pos_2" value="$(arg obstacle_2_x)" />
+    <param name="y_pos_2" value="$(arg obstacle_2_y)" />
+    <param name="z_pos_2" value="$(arg obstacle_2_z)" />
+    <param name="theta_2" value="$(arg obstacle_2_theta)" />
+  </node>
+
+</launch>

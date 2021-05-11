@@ -1,0 +1,19 @@
+<!-- Assumes Gazebo is already running -->
+<launch>
+  <!-- This launch file includes all the nodes needed to setup a simulated fetch -->
+
+  <!-- Settings (Robot position args are overidden by spawn_world.launch)-->
+  <arg name="x" default="0.0" />
+  <arg name="y" default="0.0" />
+  <arg name="z" default="0.1" />
+  <arg name="yaw" default="0.0" /> <!-- Rotation in radians. -->
+
+   <!-- Spawn Fetch  -->
+  <include file="$(find fetch_gazebo)/launch/include/fetch.launch.xml">
+    <arg name="x" default="$(arg x)" />
+    <arg name="y" default="$(arg y)" />
+    <arg name="z" default="$(arg z)" />
+    <arg name="yaw" default="$(arg yaw)" />
+  </include>
+
+</launch>
