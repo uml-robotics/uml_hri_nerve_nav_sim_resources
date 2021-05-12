@@ -76,7 +76,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/chassis.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/chassis.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -91,7 +91,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/back_sonar.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/back_sonar.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -106,7 +106,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/hokuyo.dae</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/hokuyo.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -121,7 +121,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/front_sonar.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/front_sonar.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -151,7 +151,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/kinect.dae</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/kinect.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -166,7 +166,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/top.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/top.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -299,7 +299,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/left_wheel.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/left_wheel.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -314,7 +314,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/left_hubcap.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/left_hubcap.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -387,7 +387,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/right_wheel.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/right_wheel.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -402,7 +402,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/right_hubcap.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/right_hubcap.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -452,7 +452,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/swivel.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/swivel.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -518,7 +518,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/center_wheel.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/center_wheel.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -533,7 +533,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>file:///home/csrobot/catkin_ws/src/uml_3d_race/resources/models/pioneer/meshes/center_hubcap.stl</uri>
+            <uri>file:///home/csrobot/catkin_ws/src/uml_hri_nerve_nav_sim_resources/resources/models/pioneer/meshes/center_hubcap.stl</uri>
           </mesh>
         </geometry>
         <material>

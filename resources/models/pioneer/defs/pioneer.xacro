@@ -7,6 +7,6 @@
 
 <robot name="pioneer" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find uml_3d_race)/resources/models/pioneer/defs/pioneer_body.xacro"/>
+  <xacro:include filename="$(find uml_hri_nerve_nav_sim_resources)/resources/models/pioneer/defs/pioneer_body.xacro"/>
 
 </robot>

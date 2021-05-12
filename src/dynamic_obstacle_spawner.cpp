@@ -7,9 +7,10 @@
 
 
 #include "ros/ros.h"
-#include <string>
+#include <string.h>
 #include <geometry_msgs/Pose.h>
 #include <move_base_msgs/MoveBaseActionResult.h>
+#include <std_msgs/Bool.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <gazebo_msgs/SpawnModel.h>
 #include <gazebo_msgs/DeleteModel.h>
@@ -27,6 +28,7 @@ float z_pos_2 = 0.0;
 float theta_2 = 0.0;
 
 bool side_toggle = false;
+bool test_active = false;
 
 ros::ServiceClient spawner_service;
 ros::ServiceClient delete_service;
@@ -73,8 +75,8 @@ void delete_object(std::string object_name)
 
 void state_callback(const move_base_msgs::MoveBaseActionResult::ConstPtr &state)
 {
-  if (state->status.status == state->status.SUCCEEDED || state->status.status == state->status.ABORTED || 
-      state->status.status == state->status.REJECTED)
+  if ((state->status.status == state->status.SUCCEEDED || state->status.status == state->status.ABORTED || 
+      state->status.status == state->status.REJECTED) && test_active)
   {
     //Switch the objects location
     if(side_toggle)
@@ -97,7 +99,11 @@ void state_callback(const move_base_msgs::MoveBaseActionResult::ConstPtr &state)
     //Add a delay to avoid toggle chaos
     ros::Duration(1).sleep();
   }
-    
+}
+
+void test_status_callback(const std_msgs::Bool::ConstPtr &test_state)
+{
+  test_active = test_state->data;  
 }
 
 int main(int argc, char **argv){
@@ -124,7 +130,7 @@ int main(int argc, char **argv){
   spawner_service = n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model");
   delete_service = n.serviceClient<gazebo_msgs::DeleteModel>("/gazebo/delete_model");
   ros::Subscriber move_base_results = n.subscribe("move_base/result", 10, state_callback);
-
+  ros::Subscriber test_status = n.subscribe("/test_status", 10, test_status_callback);
   //Wait for the spawner service to be available
   spawner_service.waitForExistence();
   delete_service.waitForExistence();
