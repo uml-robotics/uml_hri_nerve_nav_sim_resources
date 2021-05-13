@@ -14,7 +14,7 @@
   <arg name="spawn_yaw" default="0"/>
 
   <!-- Define map settings, values are set in the level launch files-->
-  <arg name="world_path" />
+  <arg name="world_path" default="level1.world"/>
 
   <!-- Determine whether an obstacle robot should be spawned in -->
   <arg name="obstacle_bot" default="false" />
@@ -42,7 +42,7 @@
   <arg name="obstacle_name" default="caution_100cm_block" />
 
   <!-- Flip obstacle spawner -->
-  <arg name="flip_obstacle" default="true" />
+  <arg name="flip_obstacle" default="false" />
 
   <!-- Publish robot spawn if robot resetting is needed -->
   <node name="spawn_publisher" pkg="uml_hri_nerve_nav_sim_resources" type="spawn_publisher" output="screen" >
