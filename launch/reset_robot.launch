@@ -4,8 +4,7 @@
        relaunching gazebo every time you want to start over. It's faster. -->
 
   <!-- Name of the gazebo model being reset -->
-  <arg name="model_type" default="pioneer" />
-  <!-- Topic to find pose to reset to -->
+  <arg name="model_type" />
 
   <node name="reset_node" pkg="uml_hri_nerve_nav_sim_resources" type="reset_robot" output="screen">
     <param name="model_name" value="$(arg model_name)" />
