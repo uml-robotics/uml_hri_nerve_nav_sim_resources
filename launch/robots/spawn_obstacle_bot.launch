@@ -22,11 +22,15 @@
   <!-- publish TFs for static/fixed links (based on the robot_description parameter) -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="state_publisher" output="screen">
     <param name="publish_frequency" type="double" value="30.0"/>
+    <param name="tf_prefix" value="$(arg model_name)" />
+    <remap from="robot_description" to="$(arg model_name)/robot_description"/>
   </node>
   <!-- Without the joint_state_publisher, non-fixed joints that are not published by a plugin
        (i.e. - the swivel_link joint) will not have it's transform published.
        joint_state_publisher also uses the robot_description parameter. -->
-  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_publisher" output="screen"/>
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_publisher" output="screen">
+    <remap from="robot_description" to="$(arg model_name)/robot_description"/>
+  </node>
 
   <!-- Spawn robot into Gazebo -->
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="
