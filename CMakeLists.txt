@@ -8,13 +8,11 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  gazebo_ros
   roscpp
   std_msgs
   std_srvs
   geometry_msgs
   tf2
-  message_generation
   move_base_msgs
   actionlib
   gazebo_msgs
@@ -113,12 +111,10 @@ catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES uml_hri_nerve_nav_sim_resources
    CATKIN_DEPENDS
-   gazebo_ros 
    roscpp 
    std_msgs 
    std_srvs 
    geometry_msgs 
-   message_runtime 
    actionlib 
    gazebo_msgs
 #  DEPENDS system_lib

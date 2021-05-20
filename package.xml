@@ -54,12 +54,12 @@
   <build_depend>roscpp</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>std_srvs</build_depend>
-  <build_depend>message_generation</build_depend>
   <build_depend>actionlib</build_depend>
   <build_depend>gazebo_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>fetch_ros</build_depend>
   <build_depend>fetch_gazebo</build_depend>
+  <build_depend>mir_robot</build_depend>
   <build_export_depend>gazebo_ros</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>std_msgs</build_export_depend>
@@ -69,16 +69,17 @@
   <build_export_depend>geometry_msgs</build_export_depend>
   <build_export_depend>fetch_ros</build_export_depend>
   <build_export_depend>fetch_gazebo</build_export_depend>
+  <build_export_depend>mir_robot</build_export_depend>
   <exec_depend>gazebo_ros</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>std_srvs</exec_depend>
-  <exec_depend>message_runtime</exec_depend>
   <exec_depend>actionlib</exec_depend>
   <exec_depend>gazebo_msgs</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>fetch_ros</exec_depend>
   <exec_depend>fetch_gazebo</exec_depend>
+  <exec_depend>mir_robot</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
