@@ -113,7 +113,7 @@ catkin_package(
    CATKIN_DEPENDS
    roscpp 
    std_msgs 
-   std_srvs 
+   std_srvs
    geometry_msgs 
    actionlib 
    gazebo_msgs

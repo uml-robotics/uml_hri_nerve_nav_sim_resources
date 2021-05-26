@@ -4,12 +4,13 @@
   <xacro:property name="robot_height" value="1.0" />
   <xacro:property name="robot_radius" value="0.25" />
   <xacro:property name="antenna_len" value="0.2" />
+  <xacro:property name="tf_prefix" value="$(arg tf_prefix)" />
 
   <!-- <xacro:property name="robot_height" value="$(arg height)" />
   <xacro:property name="robot_radius" value="$(arg radius)" /> -->
 
   <!-- root link, on the ground just below the model origin -->
-  <link name="base_footprint">
+  <link name="${tf_prefix}base_footprint">
    <origin xyz="0 0 0" rpy="0 0 0" />
    <visual>
       <origin xyz="0 0 ${robot_height+(antenna_len/2)}" rpy="0 0 0" />
@@ -21,12 +22,12 @@
       </material>
     </visual>
   </link>
-  <gazebo reference="base_footprint">
+  <gazebo reference="${tf_prefix}base_footprint">
     <material value="Gazebo/Grey"/>
   </gazebo>
 
   <!-- the model -->
-  <link name="base_link">
+  <link name="${tf_prefix}base_link">
     <inertial>
       <mass value="50" />
       <!-- SUBTERRANIAN MASS -->
@@ -51,7 +52,7 @@
       </geometry>
     </collision>
   </link>
-  <gazebo reference="base_link">
+  <gazebo reference="${tf_prefix}base_link">
     <visual>
       <material>
         <script>
@@ -63,7 +64,7 @@
   </visual>
   </gazebo>
 
-  <link name="antenna_link">
+  <link name="${tf_prefix}antenna_link">
     <origin xyz="0 0 0" rpy="0 0 0" />
     <visual>
       <geometry>
@@ -80,11 +81,11 @@
       </geometry>
     </collision>
   </link>
-  <gazebo reference="antenna_link">
+  <gazebo reference="${tf_prefix}antenna_link">
     <material value="Gazebo/Red"/>
   </gazebo>
 
-  <link name="directional_link">
+  <link name="${tf_prefix}directional_link">
     <origin xyz="0 0 0" rpy="0 0 0" />
     <visual>
       <geometry>
@@ -105,7 +106,7 @@
     <material value="Gazebo/Grey"/>
   </gazebo>
 
-  <link name="scan_link">
+  <link name="${tf_prefix}scan_link">
     <visual>
       <geometry>
         <sphere radius="0.002" />
@@ -115,7 +116,7 @@
       </material>
     </visual>
   </link>
-  <gazebo reference="scan_link">
+  <gazebo reference="${tf_prefix}scan_link">
     <material value="Gazebo/Black"/>
     <sensor name='$(arg model_name)_laser' type='ray'>
       <pose frame=''>0 0 0 0 0 0</pose>
@@ -142,7 +143,7 @@
       <plugin name='$(arg model_name)_laser' filename='libgazebo_ros_laser.so'>
         <!-- model_name is an argument sent to the top level xml file (when setting robot_description) -->
         <topicName>$(arg model_name)/scan</topicName>
-        <frameName>$(arg model_name)/scan_link</frameName>
+        <frameName>${tf_prefix}scan_link</frameName>
       </plugin>
       <always_on>1</always_on>
       <update_rate>30</update_rate>
@@ -150,37 +151,37 @@
     </sensor>
   </gazebo>
 
-  <joint name="base_link_joint" type="fixed">
+  <joint name="${tf_prefix}base_link_joint" type="fixed">
     <origin xyz="0 0 ${robot_height/2}" rpy="0 0 0" />
-    <parent link="base_footprint"/>
-    <child link="base_link" />
+    <parent link="${tf_prefix}base_footprint"/>
+    <child link="${tf_prefix}base_link" />
   </joint>
 
-  <joint name="antenna_link_joint" type="fixed">
+  <joint name="${tf_prefix}antenna_link_joint" type="fixed">
     <origin xyz="0 0 ${robot_height+antenna_len}" rpy="0 0 0" />
-    <parent link="base_footprint"/>
-    <child link="antenna_link" />
+    <parent link="${tf_prefix}base_footprint"/>
+    <child link="${tf_prefix}antenna_link" />
   </joint>
 
-  <joint name="directional_link_joint" type="fixed">
+  <joint name="${tf_prefix}directional_link_joint" type="fixed">
     <origin xyz="${robot_radius-0.01} 0 -${3*(robot_height/8)}" rpy="0 0 0.785398" />
-    <parent link="base_link"/>
-    <child link="directional_link" />
+    <parent link="${tf_prefix}base_link"/>
+    <child link="${tf_prefix}directional_link" />
   </joint>
 
-  <joint name="scan_link_joint" type="fixed">
+  <joint name="${tf_prefix}scan_link_joint" type="fixed">
     <origin xyz="0.04 -0.04 0" rpy="0 0 -0.785398" />
-    <parent link="directional_link"/>
-    <child link="scan_link" />
+    <parent link="${tf_prefix}directional_link"/>
+    <child link="${tf_prefix}scan_link" />
   </joint>
 
   <gazebo>
     <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
       <commandTopic>$(arg model_name)/cmd_vel</commandTopic>
       <odometryTopic>$(arg model_name)/odom</odometryTopic>
-      <odometryFrame>$(arg model_name)/odom</odometryFrame>
+      <odometryFrame>${tf_prefix}odom</odometryFrame>
       <odometryRate>20.0</odometryRate>
-      <robotBaseFrame>$(arg model_name)/base_footprint</robotBaseFrame>
+      <robotBaseFrame>${tf_prefix}base_footprint</robotBaseFrame>
     </plugin>
   </gazebo>
 

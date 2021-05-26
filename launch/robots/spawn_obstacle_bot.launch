@@ -17,12 +17,12 @@
 
   <!-- Load robot_description parameter from top-level pioneer3dx.xacro file -->
   <!-- Also send the model_dir and model_name as arguments to help us generate the model -->
-  <param name="$(arg model_name)/robot_description" command="$(find xacro)/xacro --inorder $(arg model_file) model_name:=$(arg model_name)" />
+  <param name="$(arg model_name)/robot_description" command="$(find xacro)/xacro --inorder $(arg model_file) model_name:=$(arg model_name) 
+  tf_prefix:=$(arg model_name)_"/>
 
   <!-- publish TFs for static/fixed links (based on the robot_description parameter) -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="state_publisher" output="screen">
     <param name="publish_frequency" type="double" value="30.0"/>
-    <param name="tf_prefix" value="$(arg model_name)" />
     <remap from="robot_description" to="$(arg model_name)/robot_description"/>
   </node>
   <!-- Without the joint_state_publisher, non-fixed joints that are not published by a plugin
