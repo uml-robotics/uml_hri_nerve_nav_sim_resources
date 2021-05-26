@@ -12,7 +12,7 @@ echo "Grant permissions for Gazebo Textures folder:"
 sudo chmod 777 /usr/share/gazebo-7/media/materials/*
 echo
 echo "Copying Models..."
-cd $ROS_WORKSPACE/src/uml_3d_race
+cd $ROS_WORKSPACE/src/uml_hri_nerve_nav_sim_resources
 echo "- SDF Pioneer 2 Wheel"; cp -r ./resources/models/sdf_robots/pioneer_2wd $destination
 echo "- SDF Pioneer 4 Wheel"; cp -r ./resources/models/sdf_robots/pioneer_4wd $destination
 echo "- Track Pieces"; cp -r ./resources/models/track_models/* $destination
