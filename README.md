@@ -4,26 +4,31 @@
 ## About:
 The UML HRI Nerve Nav Sim Resources package provides all of the simulation resources for the UML HRI Nerve Navigation package.  This package is designed to be used in conjuction with the UML HRI Nerve Navigation package.  The Gazebo simulator is used for all of the simulations. Refer to the UML HRI Nerve Navigation package for documentation on how to run navigation tests.
 
-## Setup:
-1. Clone this repository into your catkin workspace.
+## UML HRI Nerve Navigation Package Suite Setup:
+1. Clone this repository and the Nav Sim Resources repository and into your catkin workspace.
   > cd ~/<your_ws>/src   
-  > git clone https://github.com/uml-robotics/uml_hri_nerve_nav_sim_resources.git 
-2. Install package dependencies
-  > rosdep update   
-  > rosdep install uml_hri_nerve_nav_sim_resources
-3. Build your catkin workspace.   
+  > git clone https://github.com/uml-robotics/uml_hri_nerve_navigation.git
+  > git clone https://github.com/uml-robotics/uml_hri_nerve_nav_sim_resources.git
+2. Attempt to build your catkin workspace (will fail building helps with later steps).   
   > cd ..  
   > catkin build   
-4. Source the workspace.  
+3. Source the workspace.  
   > source devel/setup.bash
-5. Run the setup.sh bash script
+4. Install package dependencies
+  > rosdep update   
+  > rosdep install uml_hri_nerve_navigation  
+  > rosdep install uml_hri_nerve_nav_sim_resources   
+  If this fails, all of the packages needed are in the package.xml file and use sudo apt install ros-[ROS_VERSION]-[PKG_NAME] to install the necessary packages
+5. Build your catkin workspace.   
+  > cd ..  
+  > catkin build   
+6. Source the workspace.  
+  > source devel/setup.bash
+7. Also, a setup bash script must be ran in the UML HRI Nerve Nav Sim Resources package before running any simulations
   > roscd uml_hri_nerve_nav_sim_resources    
   > . setup.sh
-6. To install the UML HRI Nerve Navigation package, repeat the same commands above but replace the git clone command and the rosdep install command to the following and ignore step 5:
-  > git clone https://github.com/uml-robotics/uml_hri_nerve_navigation.git  
-  > rosdep install uml_hri_nerve_navigation
 
-At this point, if all goes well, the package should be ready to run.  
+At this point, if all goes well, all of the uml navigation packages should be ready to run.  
 
 **NOTE BEFORE STARTING:** Sometimes Gazebo can be a bit finicky, and may fail to launch properly for an array of reasons. If something goes wrong, Ctrl+c on the launch file that launched Gazebo and try again a few times. If the problem persists there may be an actual issue that needs to be resolved first, but unless you've already started making changes within this package, that shouldn't be the case.  
 
