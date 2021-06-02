@@ -8,14 +8,14 @@ The UML HRI Nerve Nav Sim Resources package provides all of the simulation resou
 1. Clone this repository into your catkin workspace.
   > cd ~/<your_ws>/src   
   > git clone https://github.com/uml-robotics/uml_hri_nerve_nav_sim_resources.git 
-2. Build your catkin workspace.   
-  > cd ..  
-  > catkin build   
-3. Source the workspace.  
-  > source devel/setup.bash
-4. Install package dependencies
+2. Install package dependencies
   > rosdep update   
   > rosdep install uml_hri_nerve_nav_sim_resources
+3. Build your catkin workspace.   
+  > cd ..  
+  > catkin build   
+4. Source the workspace.  
+  > source devel/setup.bash
 5. Run the setup.sh bash script
   > roscd uml_hri_nerve_nav_sim_resources    
   > . setup.sh
