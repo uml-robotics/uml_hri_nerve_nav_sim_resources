@@ -1,15 +1,19 @@
 #!/bin/bash
 
 #This script copies all of the textures that are used in gazebo from this package 
+#Arguments: 1 - int for gazebo version
+
+gazebo_version=$1
+
 original_dir=$PWD
 destination="$HOME/.gazebo/models/"
-destination2="/usr/share/gazebo-7/media/materials/"
+destination2="/usr/share/gazebo-$1/media/materials"
 echo
 echo "Model Destination: $destination"
 echo "Texture Destination: $destination2"
 echo
 echo "Grant permissions for Gazebo Textures folder:"
-sudo chmod 777 /usr/share/gazebo-7/media/materials/*
+sudo chmod 777 /usr/share/gazebo-$1/media/materials/*
 echo
 echo "Copying Models..."
 cd $ROS_WORKSPACE/src/uml_hri_nerve_nav_sim_resources

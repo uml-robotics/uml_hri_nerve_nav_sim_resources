@@ -26,11 +26,12 @@ The UML HRI Nerve Nav Sim Resources package provides all of the simulation resou
   > source devel/setup.bash
 7. Also, a setup bash script must be ran in the UML HRI Nerve Nav Sim Resources package before running any simulations
   > roscd uml_hri_nerve_nav_sim_resources    
-  > . setup.sh
+  > . setup.sh [# for gazebo version (7 if kinetic and 9 if melodic)]
 
 At this point, if all goes well, all of the uml navigation packages should be ready to run.  
 
 **NOTE BEFORE STARTING:** Sometimes Gazebo can be a bit finicky, and may fail to launch properly for an array of reasons. If something goes wrong, Ctrl+c on the launch file that launched Gazebo and try again a few times. If the problem persists there may be an actual issue that needs to be resolved first, but unless you've already started making changes within this package, that shouldn't be the case.  
+**NOTE BEFORE STARTING:** If Melodic is being used, there are issues with the fetch simulation package and the robot will not operate properly in simulation.   
 
 ## Important Launch Files:    
 * **setup_simulation.launch** - This is a high level launch file that includes all of the necessary launch files required to start a simulation with a robot. There are several arguments for this launch file that allow for a modular setup of a simulated world.  Note this launch file is usually launched through the use of a level launch file   
@@ -93,8 +94,11 @@ At this point, if all goes well, all of the uml navigation packages should be re
   To spawn a fetch robot with a specified position (example):  
   > roslaunch uml_hri_nerve_nav_sim_resources spawn_fetch.launch x:=5.0 y:=5.0 yaw:=3.14
 
-## Adding a New World:
-  TODO
+## Adding a New Gazebo World:
+1. **Create a .world file by using either the Gazebo GUI or writing your own .world file and save the world to the /worlds folder**  
+For more information on writing a .world file, refer to the following websites:  http://gazebosim.org/tutorials?tut=build_world and http://sdformat.org/spec    
+2. **Create a level launch file**    
+First copy one of the premade level launch files in the launch/levels folder and rename the launch file to be the same as the world name.  Then change the values of the world dependent arguments such as world_name, world_path, and spawn locations.  To figure out what each argument does, refer to the Important Launch Files section below in this README.
 
 ## Adding a New Robot:
   TODO
@@ -118,7 +122,8 @@ At this point, if all goes well, all of the uml navigation packages should be re
   * **reset_robot.cpp** - Subscribes to the /spawn topic and resets the robot models position.  
   * **spawn_pub.cpp** - Publishes the robots spawn location on the /spawn topic.   
 * **worlds/** - Contains all .world files for Gazebo to load.  
-* **setup.sh** - A setup script that makes the models and textures provided in this package available for Gazebo to use.  
+* **setup.sh** - A setup script that makes the models and textures provided in this package available for Gazebo to use.  Uses an int argument for the current gazebo version   
+
 ## Useful Resources:  
 [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials)  
 [Gazebo Tutorials](http://gazebosim.org/tutorials)  
