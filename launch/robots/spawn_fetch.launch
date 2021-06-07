@@ -9,7 +9,7 @@
   <arg name="yaw" default="0.0" /> <!-- Rotation in radians. -->
 
    <!-- Spawn Fetch  -->
-  <include file="$(find uml_hri_nerve_nav_sim_resources)/resources/models/fetch/defs/fetch.launch.xml">
+  <include file="$(find fetch_gazebo)/launch/include/fetch.launch.xml">
     <arg name="x" default="$(arg x)" />
     <arg name="y" default="$(arg y)" />
     <arg name="z" default="$(arg z)" />
